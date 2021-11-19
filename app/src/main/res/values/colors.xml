@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#151516</color>
+    <color name="colorPrimaryDark">#151516</color>
+    <color name="colorAccent">#3D53D3</color>
+    <color name="windowBackground">#212124</color>
+    <color name="navigationBarColor">#151516</color>
+    <color name="divider">#11FFFFFF</color>
+    <color name="actionBar">#151516</color>
+    <color name="colorStroke">#3BFFFFFF</color>
+
+    <color name="statusOff">#C93333</color>
+    <color name="statusOn">#4CAF50</color>
+
+    <color name="line">#3bffffff</color>
+    <color name="colorTextLineNum">#3bffffff</color>
+
+    <color name="syntax_error">#F44336</color>
+    <color name="syntax_number">#3F51B5</color>
+    <color name="syntax_keyword">#2196F3</color>
+    <color name="syntax_builtin">#FF9800</color>
+    <color name="syntax_comment">#4CAF50</color>
+    <color name="syntax_string">#FFC107</color>
+    <color name="syntax_cursor">#FFFFFF</color>
+
+    <color name="bg_syntax">#151516</color>
+</resources>

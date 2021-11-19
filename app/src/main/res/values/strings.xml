@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">CLEO: SA</string>
+    <string name="app_name_full">CLEO: SA Manager</string>
+
+    <string name="hint_create_script">Enter name script</string>
+
+    <string name="action_information">Information</string>
+    <string name="action_script_on">On</string>
+    <string name="action_script_off">Off</string>
+    <string name="action_close">Close</string>
+    <string name="action_download_cleo_apk">Download CLEO apk</string>
+    <string name="action_download_cleo_scripts">Download CLEO scripts</string>
+    <string name="action_delete_script">Delete</string>
+    <string name="action_enable_script">Enable</string>
+    <string name="action_disable_script">Disable</string>
+    <string name="action_edit_script">Edit</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_create">Create</string>
+
+    <string name="message_hello">Hay! Here you can manage script.</string>
+    <string name="message_info_csa">Autostart type script, launches every game load</string>
+    <string name="message_info_csi">Invokable type script, launches thru CLEO menu</string>
+    <string name="message_information_1">Download the game/cache from Google Play or on any other site, if you downloaded the cache - before unpacking it, install the CLEO apk.  If you installed the game from Google Play - go to explorer and rename \"../Android/obb/com.rockstargames.gtasa\" to any other, let\'s say: com.rockstargames.gtasa1, then install the CLEO apk after installation, rename the folder back.</string>
+    <string name="message_information_2">Download any CLEO script and go to the explorer along the path \"../Android/data/com.rockstargames.gtasa\" drop the CLEO script here and go to the game.</string>
+    <string name="message_information_3">Instagram: mixno35\nVK: mixno35\nGitHub: mixno35\nTelegram: mixno35</string>
+    <string name="message_delete_script">You are delete this script \"%1s\"?</string>
+    <string name="message_file_deleted">File \"%1s\" deleted!</string>
+    <string name="message_grant_permissions">Imagine accessing a repository. Access to the repository is needed for the application to be able to work with script. Click \"SETTINGS > PERMISSIONS > STORAGE > ACCESS(ON)\".</string>
+    <string name="message_edit_script_save">The script may not work correctly or stop working altogether. Are you sure you want to save toy changes?</string>
+
+    <string name="title_information_1">How to install CLEO apk</string>
+    <string name="title_information_2">How to install the CLEO script</string>
+    <string name="title_information_3">It might be helpful</string>
+    <string name="title_grant_permissions">Permission storage</string>
+    <string name="title_edit_script_save">Save script</string>
+    <string name="title_create_script">New cleo script</string>
+
+    <string name="toast_no_scripts">No scripts...</string>
+</resources>

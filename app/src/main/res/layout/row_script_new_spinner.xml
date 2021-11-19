@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textName"
+        android:text="Test name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textDescription"
+        android:text="Test description"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        android:textSize="12sp"/>
+
+</LinearLayout>

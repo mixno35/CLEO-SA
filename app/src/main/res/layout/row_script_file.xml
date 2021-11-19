@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp">
+
+    <TextView
+        android:id="@+id/textName"
+        android:textSize="12sp"
+        android:text="script_file_name.csa"
+        android:paddingLeft="0dp"
+        android:paddingRight="4dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/imageEdit"
+        android:layout_width="@dimen/sizeIconEditScriptFile"
+        android:layout_height="@dimen/sizeIconEditScriptFile"
+        android:src="@drawable/ic_create_black_24dp"
+        android:padding="5dp"
+        android:background="?selectableItemBackgroundBorderless"/>
+
+</LinearLayout>

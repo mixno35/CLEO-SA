@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">CLEO: SA</string>
+    <string name="app_name_full">CLEO: SA Менеджер</string>
+
+    <string name="hint_create_script">Введите название скрипта</string>
+
+    <string name="action_information">Информация</string>
+    <string name="action_script_on">Вкл</string>
+    <string name="action_script_off">Выкл</string>
+    <string name="action_close">Закрыть</string>
+    <string name="action_download_cleo_apk">Скачать CLEO apk</string>
+    <string name="action_download_cleo_scripts">Скачать CLEO скрипты</string>
+    <string name="action_delete_script">Удалить</string>
+    <string name="action_enable_script">Активировать</string>
+    <string name="action_disable_script">Отключить</string>
+    <string name="action_edit_script">Редактировать</string>
+    <string name="action_settings">Настройки</string>
+    <string name="action_cancel">Отмена</string>
+    <string name="action_create">Создать</string>
+
+    <string name="message_hello">Привет! Это менеджер CLEO скрптов.</string>
+    <string name="message_info_csa">Автоматический запуск скрипта, при старте игры</string>
+    <string name="message_info_csi">Скрипт активируется из меню CLEO</string>
+    <string name="message_information_1">Скачиваем игру/кэш из Google Play или на любом другом сайте, если скачали кэш - перед его распаковкой, установите CLEO apk. Если вы установили игру из Google Play - перейдите в проводник и \"../Android/obb/com.rockstargames.gtasa\" переименовываем в любое друго, допустим: com.rockstargames.gtasa1, после чего устанавливаем CLEO apk после установки, переименовываем папку обратно.</string>
+    <string name="message_information_2">Скачиваем любой CLEO скрипт и переходим в проводник по пути \"../Android/data/com.rockstargames.gtasa\" скидываем сюда CLEO скрипт и заходим а игру.</string>
+    <string name="message_information_3">Instagram: mixno35\nВКонтакте: mixno35\nGitHub: mixno35\nTelegram: mixno35</string>
+    <string name="message_delete_script">Вы действительно хотите удалить этот скрипт \"%1s\"?</string>
+    <string name="message_file_deleted">Файл \"%1s\" успешно удален!</string>
+    <string name="message_grant_permissions">Предоставьте доступ к харанилищу. Доступ к хранилищу, нужен чтобы приложение смогло работать с скриптами. Нажмите \"НАСТРОЙКИ > РАЗРЕШЕНИЯ > ХРАНИЛИЩЕ > РАЗРЕШИТЬ(ВКЛ)\".</string>
+    <string name="message_edit_script_save">Скрипт может работать не корректно или вовсе перестать работать. Вы действительно хотите сохранить изменения?</string>
+
+    <string name="title_information_1">Как установить CLEO apk</string>
+    <string name="title_information_2">Как установить CLEO скрипт</string>
+    <string name="title_information_3">Может быть полезно</string>
+    <string name="title_grant_permissions">Доступ к хранилищу</string>
+    <string name="title_edit_script_save">Сохранить</string>
+    <string name="title_create_script">Создать cleo скрипт</string>
+
+    <string name="toast_no_scripts">Нет активных скриптов...</string>
+</resources>
