@@ -1,6 +1,7 @@
 package com.mixno.cleo_sa;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
@@ -16,17 +17,25 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.storage.StorageManager;
+import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -60,10 +69,16 @@ public class MainActivity extends AppCompatActivity {
     private static List<ScriptFileModel> listF = new ArrayList<>();
 
     private static final int REQUEST_CODE_PERMISSION = 15;
+    private static final int REQUEST_ACTION_OPEN_DOCUMENT_TREE = 26;
+    private static final int REQUEST_ACTION_OPEN_DOCUMENT_MANAGER = 27;
 
     private String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
 
     private FloatingActionButton fab;
+
+    private AdView adView;
+
+    private SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +88,22 @@ public class MainActivity extends AppCompatActivity {
         recycler = findViewById(R.id.recycler);
         swipe = findViewById(R.id.swipe);
         fab = findViewById(R.id.fab);
+        adView = findViewById(R.id.adView);
+
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if (sp.getString("disable_ads", "").equals("banner") || sp.getString("disable_ads", "").equals("all")) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    adView.setVisibility(View.GONE);
+                }
+            });
+        } else {
+            MobileAds.initialize(this, "ca-app-pub-2543059856849154~7048317671");
+            AdRequest adRequest = new AdRequest.Builder().addTestDevice("F4A58C794027AEB7BE7E8A365FA6877E").build();
+            adView.loadAd(adRequest);
+        }
 
 //        Toast.makeText(this, getString(R.string.message_hello), Toast.LENGTH_SHORT).show();
 
@@ -97,19 +128,91 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        StorageManager storageManagerStat = (StorageManager) this.getSystemService(Context.STORAGE_STATS_SERVICE);
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//            StorageManager storageManager = (StorageManager) this.getSystemService(Context.STORAGE_SERVICE);
+//            Intent intentStorage = storageManager.getPrimaryStorageVolume().createOpenDocumentTreeIntent();
+//            String startDir = "Android" + File.separator + "data";
+//            Uri uri = intentStorage.getParcelableExtra("android.provider.extra.INITIAL_URI");
+//            String scheme = uri.toString();
+//            scheme = scheme.replace("/root/", "/document/");
+//            startDir = startDir.replace("/", "%2F");
+//            scheme += "%3A" + startDir;
+//            uri = Uri.parse(scheme);
+//            intentStorage.putExtra("android.provider.extra.INITIAL_URI", uri);
+//            startActivityForResult(intentStorage, REQUEST_ACTION_OPEN_DOCUMENT_TREE);
+//
+//        }
+
+        checkPermission();
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_PERMISSION && resultCode == Activity.RESULT_OK) {
+            loadList(MainActivity.this);
+        } if (requestCode == REQUEST_ACTION_OPEN_DOCUMENT_TREE && resultCode == Activity.RESULT_OK) {
+            loadList(MainActivity.this);
+        }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if (ContextCompat.checkSelfPermission(this, permissions[0]) != PackageManager.PERMISSION_GRANTED) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                DataSA.setGrantPermissionsSettings(MainActivity.this);
-                return;
+
+
+    }
+
+    private void checkPermission () {
+        // 1-8
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+            if (ContextCompat.checkSelfPermission(this, permissions[0]) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_PERMISSION);
             }
-            ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE_PERMISSION);
+            return;
+        }
+        // 9-10
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            if (ContextCompat.checkSelfPermission(this, permissions[0]) != PackageManager.PERMISSION_GRANTED) {
+                DataSA.setGrantPermissionsSettings(MainActivity.this);
+            }
+            return;
         } else {
-            loadList(MainActivity.this);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+                loadList(MainActivity.this);
+            }
+        }
+        // 11+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (Environment.isExternalStorageManager()) {
+                Toast.makeText(getApplicationContext(), "Permission Android 11+ Granded!", Toast.LENGTH_SHORT).show();
+                StorageManager storageManager = (StorageManager) this.getSystemService(Context.STORAGE_SERVICE);
+                Intent intentStorage = null;
+                intentStorage = storageManager.getPrimaryStorageVolume().createOpenDocumentTreeIntent();
+                String startDir = "Android" + File.separator + "data";
+                Uri uri = intentStorage.getParcelableExtra("android.provider.extra.INITIAL_URI");
+                String scheme = uri.toString();
+                scheme = scheme.replace("/root/", "/document/");
+                startDir = startDir.replace("/", "%2F");
+                scheme += "%3A" + startDir;
+                uri = Uri.parse(scheme);
+                intentStorage.putExtra("android.provider.extra.INITIAL_URI", uri);
+                startActivityForResult(intentStorage, REQUEST_ACTION_OPEN_DOCUMENT_TREE);
+                // loadList(MainActivity.this);
+            } else {
+                try {
+                    Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                    intent.addCategory("android.intent.category.DEFAULT");
+                    intent.setData(Uri.parse(String.format("package:%s", getApplicationContext().getPackageName())));
+                    startActivityForResult(intent, REQUEST_ACTION_OPEN_DOCUMENT_MANAGER);
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -127,6 +230,9 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+        if (item.getItemId() == R.id.actionCleo) {
+            startActivity(new Intent(MainActivity.this, CleoActivity.class));
         }
         return true;
     }
@@ -233,10 +339,14 @@ public class MainActivity extends AppCompatActivity {
         final MaterialButton actionSocialVK = inflate.findViewById(R.id.actionSocialVK);
         final MaterialButton actionSocialTelegram = inflate.findViewById(R.id.actionSocialTelegram);
 
+        final MaterialButton actionAdsActivateAll = inflate.findViewById(R.id.actionAdsActivateAll);
+        final MaterialButton actionAdsDisableAll = inflate.findViewById(R.id.actionAdsDisableAll);
+        final MaterialButton actionAdsDisableBanner = inflate.findViewById(R.id.actionAdsDisableBanner);
+
         actionCleoApk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DataSA.openUrl(MainActivity.this, "https://libertycity.ru/files/gta-san-andreas-ios-android/143037-cleo-gta-sa-2.0-bez-root-prav.html");
+                DataSA.openUrl(MainActivity.this, "https://libertycity.ru/files/gta-san-andreas-ios-android/156957-cleo-gta-sa-2.00-android-11-fix-flm-6.0.html");
             }
         });
         actionCleoScript.setOnClickListener(new View.OnClickListener() {
@@ -249,19 +359,41 @@ public class MainActivity extends AppCompatActivity {
         actionSocialInstagram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DataSA.openUrl(MainActivity.this, "https://instagram.com/mixno35");
+                DataSA.openUrl(MainActivity.this, "https://instagram.com/xianitt");
             }
         });
         actionSocialVK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DataSA.openUrl(MainActivity.this, "https://vk.com/mixno35");
+                DataSA.openUrl(MainActivity.this, "https://vk.com/xianitt");
             }
         });
         actionSocialTelegram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DataSA.openUrl(MainActivity.this, "https://t.me/mixno35");
+                DataSA.openUrl(MainActivity.this, "https://t.me/xianitt");
+            }
+        });
+
+        actionAdsActivateAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sp.edit().putString("disable_ads", "").apply();
+                Toast.makeText(MainActivity.this, "All ads activated!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        actionAdsDisableAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sp.edit().putString("disable_ads", "all").apply();
+                Toast.makeText(MainActivity.this, "All ads disabled!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        actionAdsDisableBanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sp.edit().putString("disable_ads", "banner").apply();
+                Toast.makeText(MainActivity.this, "Banner disabled!", Toast.LENGTH_SHORT).show();
             }
         });
 

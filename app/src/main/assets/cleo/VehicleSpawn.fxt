@@ -1,0 +1,37 @@
+VSID ~h~Vehicle ID: ~1~
+VSHAF01 ~h~Vehicle_Spawn
+VSHAF02 ~h~Bikes
+VSHAF03 ~h~Cars
+VSHAF04 ~h~Cars, Vans, Trucks A
+VSHAF05 ~h~Cars, Vans, Trucks E
+VSHAF06 ~h~Cars, Vans, Trucks M
+VSHAF07 ~h~Cars, Vans, Trucks S
+VSHAF08 ~h~Trailer
+VSHAF09 ~h~Boats
+VSHAF10 ~h~Planes
+VSHAF11 ~h~Helis~s~
+
+VSPOL1 Police LA
+VSPOL2 Police SF
+VSPOL3 Police VG
+VSACT1 Artict1
+VSACT2 Artict2
+VSACT3 Artict3
+VSBOX1 Bagboxa
+VSBOX2 Bagboxb
+VSFARM Farmtr1
+VSTUGS Tugstair
+VSUTIL Utiltr1
+VSSTRK Streak wagon
+VSRAN2 Rancher
+VSRAN3 Ranger
+VSTOPF Topfun
+VSBOBU Boxburg
+VSRANC Rnchlure
+VSHOTA Hotring A
+VSHOTB Hotring B
+VSMONA Monster A
+VSMONB Monster B
+VSSHIT Sadlshit
+VSGHIT Glenshit
+VSFRLA FireLA

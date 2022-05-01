@@ -45,6 +45,17 @@ public class ScriptFileAdapter extends RecyclerView.Adapter<ScriptFileAdapter.Sc
             }
         });
 
+        holder.imageEdit.post(new Runnable() {
+            @Override
+            public void run() {
+                if (model.getName().endsWith(".fxt")) {
+                    holder.imageEdit.setVisibility(View.VISIBLE);
+                } else {
+                    holder.imageEdit.setVisibility(View.GONE);
+                }
+            }
+        });
+
         holder.imageEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

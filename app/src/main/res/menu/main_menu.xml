@@ -4,6 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/actionCleo"
+        android:title="@string/action_cleo_scripts"
+        android:icon="@drawable/ic_cleo_scripts"
+        app:showAsAction="always"/>
+
+    <item
         android:id="@+id/actionInformation"
         android:title="@string/action_information"
         android:icon="@drawable/ic_info_black_24dp"

@@ -13,13 +13,18 @@ import androidx.appcompat.app.AlertDialog;
 import com.mixno.cleo_sa.R;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class DataSA {
 
@@ -91,7 +96,7 @@ public class DataSA {
         try {
             BufferedReader br = null;
             if (path.getPath().endsWith(".fxt")) {
-                br = new BufferedReader(new InputStreamReader(new FileInputStream(path), Charset.forName("IBM866")));
+                br = new BufferedReader(new InputStreamReader(new FileInputStream(path), Charset.forName("IBM866").newDecoder()));
             } else {
                 br = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
             }
@@ -108,12 +113,14 @@ public class DataSA {
 
     public static boolean write(File path, String text) {
         try {
-            FileOutputStream stream = new FileOutputStream(path);
-            try {
-                stream.write(text.getBytes());
-            } finally {
-                stream.close();
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), Charset.forName("IBM866").newEncoder()));
+            String arrayTest[] = text.split("\n");
+            List<String> al = new ArrayList<String>();
+            al = Arrays.asList(arrayTest);
+            for (String s : al) {
+                bw.write(s);
             }
+            bw.close();
             return true;
         } catch (Exception e) {
             return false;

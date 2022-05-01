@@ -4,7 +4,7 @@
 
     <string name="hint_create_script">Enter name script</string>
 
-    <string name="action_information">Information</string>
+    <string name="action_information">Information and Settings</string>
     <string name="action_script_on">On</string>
     <string name="action_script_off">Off</string>
     <string name="action_close">Close</string>
@@ -13,10 +13,13 @@
     <string name="action_delete_script">Delete</string>
     <string name="action_enable_script">Enable</string>
     <string name="action_disable_script">Disable</string>
-    <string name="action_edit_script">Edit</string>
+    <string name="action_edit_script">Edit (beta)</string>
     <string name="action_settings">Settings</string>
     <string name="action_cancel">Cancel</string>
     <string name="action_create">Create</string>
+    <string name="action_disable_ads_all">Disable all ads</string>
+    <string name="action_disable_ads_banner">Disable banner ads</string>
+    <string name="action_activate_ads_all">Activate all ads</string>
 
     <string name="message_hello">Hay! Here you can manage script.</string>
     <string name="message_info_csa">Autostart type script, launches every game load</string>
@@ -28,6 +31,7 @@
     <string name="message_file_deleted">File \"%1s\" deleted!</string>
     <string name="message_grant_permissions">Imagine accessing a repository. Access to the repository is needed for the application to be able to work with script. Click \"SETTINGS > PERMISSIONS > STORAGE > ACCESS(ON)\".</string>
     <string name="message_edit_script_save">The script may not work correctly or stop working altogether. Are you sure you want to save toy changes?</string>
+    <string name="message_disable_ads">By watching ads, you support the developer to improve this product. You can turn off all ads by dropping support from the developer, or continue to watch ads and support the developer.</string>
 
     <string name="title_information_1">How to install CLEO apk</string>
     <string name="title_information_2">How to install the CLEO script</string>
@@ -35,6 +39,11 @@
     <string name="title_grant_permissions">Permission storage</string>
     <string name="title_edit_script_save">Save script</string>
     <string name="title_create_script">New cleo script</string>
+    <string name="title_disable_ads">Disable ads</string>
+
+    <string name="cleo_1_cheats_1">Well-known cheats codes in Russian language</string>
+    <string name="cleo_gtasa_flying">Fly Carl</string>
 
     <string name="toast_no_scripts">No scripts...</string>
+    <string name="action_cleo_scripts">Cleo scripts</string>
 </resources>
